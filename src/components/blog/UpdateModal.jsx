@@ -44,7 +44,7 @@ export default function BasicModal() {
               id="title"
               type="text"
               variant="outlined"
-              required
+              required 
             //   value={info?.title}
              // onChange={handleChange}
             />
