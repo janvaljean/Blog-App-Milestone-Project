@@ -85,7 +85,7 @@ const useBlogCall = () => {
     try {
       await axiosWithToken.post(`api/likes/${post_id}/`)
       toastSuccessNotify(`blog successfuly updated`)
-      // getBlogData()
+      getBlogData()
     } catch (error) {
       console.log(error)
       dispatch(fetchFail())

@@ -1,13 +1,15 @@
 import React from 'react'
+import UpdateModal from "../components/blog/UpdateModal"
+
 
 const NewBlog = () => {
   return (
     <div>
-    new blog
-       card
-       modal
+    <button>tikla</button>
+      <UpdateModal />
     </div>
   )
 }
 
 export default NewBlog
+

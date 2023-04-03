@@ -26,7 +26,7 @@ export default function ImgMediaCard({blog,setOpen, setInfo }){
     const likeCounter = () =>{
         
         postLikeCreate(blog?.id)
-        console.log(blog?.likes);
+        console.log(blog);
     }
     const goMaintoDetail = () =>{
       currentUser ? navigate(`details/${blog.id}`) : navigate("login/")
@@ -52,8 +52,10 @@ export default function ImgMediaCard({blog,setOpen, setInfo }){
         </Typography>
       </CardContent>
       <CardActions sx={flex}>
-        <FavoriteBorderIcon onClick={likeCounter} />
-        {blog?.like}
+        <FavoriteBorderIcon onClick={likeCounter} 
+        />
+        {blog?.likes}
+
         <ChatBubbleOutlineIcon/>
         {blog?.comment_count}
         <RemoveRedEyeOutlinedIcon/>

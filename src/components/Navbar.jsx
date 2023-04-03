@@ -15,6 +15,8 @@ import Avatar from '@mui/material/Avatar';
 import image from "../assets/blog.jpg"
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import avatarLogo from "../assets/3551739.jpg"
+import { Login } from '@mui/icons-material'
 
 const pages = ['Dashboard', 'New Blog', 'About'];
 const settings = ['Profile', 'Dashboard', "Logout"];
@@ -26,7 +28,7 @@ const Navbar = () => {
     
     
     const navigate= useNavigate()
-    const { logout } = useAuthCall()
+    const { logout, login } = useAuthCall()
    
     
     const [anchorElNav, setAnchorElNav] = useState(null);
@@ -47,7 +49,6 @@ const Navbar = () => {
   
     const handleCloseUserMenu = (e) => {
         setAnchorElUser(null);
-        //   console.log(e.target.innerText)
     }
 
   return (
@@ -164,7 +165,7 @@ const Navbar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src={avatarLogo} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -197,14 +198,14 @@ const Navbar = () => {
                 </MenuItem>
                 {currentUser && <MenuItem onClick={()=>
                 {handleCloseNavMenu
-                  navigate("logout")
+                  
+                logout()
                 }}>
                   <Typography textAlign="center">Logout</Typography>
                 </MenuItem>}
                 {!currentUser && <MenuItem onClick={()=>
                 {handleCloseNavMenu
-                //logout
-                  navigate("login")
+                login()
                 }}>
                   <Typography textAlign="center">Login</Typography>
                 </MenuItem>}
@@ -214,7 +215,7 @@ const Navbar = () => {
         </Toolbar>
       </Container>
     </AppBar>
-  );
+  
 
     </div>
   )}

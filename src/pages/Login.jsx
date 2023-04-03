@@ -27,7 +27,7 @@ const Login = () => {
       >
         <Grid item xs={12} mb={3}>
           <Typography variant="h3" color="primary" align="center">
-            STOCK APP
+           
           </Typography>
         </Grid>
 
@@ -67,11 +67,7 @@ const Login = () => {
           </Box>
         </Grid>
 
-        <Grid item xs={10} sm={7} md={6}>
-          <Container>
-            <img src={image} alt="img" />
-          </Container>
-        </Grid>
+        
       </Grid>
     </Container>
   )
