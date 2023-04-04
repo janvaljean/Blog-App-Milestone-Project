@@ -5,10 +5,12 @@ import {
   fetchFail,
   getSuccess,
   fetchStart,
+  getCategorySuccess,
 //   getProCatBrandSuccess,
 } from "../features/blogSlice"
 import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify"
 import useAxios from "./useAxios"
+
 
 const useBlogCall = () => {
   const dispatch = useDispatch()
@@ -23,7 +25,7 @@ const useBlogCall = () => {
       //     headers: { Authorization: `Token ${token}` },
       //   })
       const { data } = await axiosWithToken(`api/blogs/`)
-      dispatch(getSuccess({ data}))
+      dispatch(getSuccess(data))
     } catch (error) {
       console.log(error)
       dispatch(fetchFail())
@@ -118,6 +120,19 @@ const useBlogCall = () => {
       toastErrorNotify(`blog can not be updated`)
     }
   }
+  
+   const getCategories = async () => {
+     dispatch(fetchStart())
+     try {
+       const {data} = await axiosWithToken(`api/categories/`)
+      dispatch(getCategorySuccess(data))
+     } catch (error) {
+       console.log(error)
+       dispatch(fetchFail())
+       toastErrorNotify(`blog can not be updated`)
+     }
+   }
+   
 
 
 
@@ -148,7 +163,9 @@ const useBlogCall = () => {
     postCommentCreate,
     postLikeCreate,
     getUserBlog,
-    getPostDetail
+    getPostDetail,
+     getCategories,
+     
     // getProCatBrand,
   }
 }

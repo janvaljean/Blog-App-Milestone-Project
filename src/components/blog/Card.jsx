@@ -26,7 +26,7 @@ export default function ImgMediaCard({blog,setOpen, setInfo }){
     const likeCounter = () =>{
         
         postLikeCreate(blog?.id)
-        console.log(blog);
+       
     }
     const goMaintoDetail = () =>{
       currentUser ? navigate(`details/${blog.id}`) : navigate("login/")

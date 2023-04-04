@@ -3,9 +3,9 @@ import Navbar from '../components/Navbar'
 import Card from '../components/blog/Card'
 import useBlogCalls from "../hooks/useBlogCalls"
 import { useSelector } from 'react-redux'
-import { Button, Grid, Typography } from '@mui/material'
+import { Grid} from '@mui/material'
 import { flex } from '../globalStyles/globalStyles'
-import Dashboard from './Dashboard'
+
 
 const Main = () => {
     const { getBlogData } = useBlogCalls()
@@ -24,6 +24,7 @@ const Main = () => {
     // getFirms()
     getBlogData(blogs)
   }, []) // eslint-disable-line
+
   return (
     <div>
         <h1>Main</h1>

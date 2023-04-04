@@ -8,8 +8,10 @@ import blogImage from "../assets/blogImage.jpg"
 import useBlogCalls from "../hooks/useBlogCalls";
 import NewBlogForm, { registerSchema } from "../components/blog/NewBlogForm";
 
+
 const NewBlog = () => {
   const { postBlogData } = useBlogCalls();
+  
 
   return (
     <Container maxWidth="lg">
@@ -58,7 +60,7 @@ const NewBlog = () => {
               title: "",
               content: "",
               image: "",
-              category: null,
+              category: "",
               slug: "",
               status: "",
             }}

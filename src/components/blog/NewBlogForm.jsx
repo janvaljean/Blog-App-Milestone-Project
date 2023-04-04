@@ -1,11 +1,12 @@
-import { InputLabel, MenuItem, OutlinedInput, Select } from "@mui/material"
+import { FormControl, InputLabel, MenuItem, OutlinedInput, Select } from "@mui/material"
 import Box from "@mui/material/Box"
 import Button from "@mui/material/Button"
 import TextField from "@mui/material/TextField"
 import { Form } from "formik"
-import { useState } from "react"
+import { useEffect } from "react"
 import { useSelector } from "react-redux"
 import { object, string } from "yup"
+import useBlogCalls from "../../hooks/useBlogCalls"
 
 export const registerSchema = object({
   username: string()
@@ -27,36 +28,43 @@ export const registerSchema = object({
     .matches(/[!,?{}><%&$#£+-.]+/, "Password bir özel karakter içermelidir"),
 })
 
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-];
-const ITEM_HEIGHT = 40;
+
+const status =[{
+    id:1,
+    value: "d",
+    type: "Draft",
+},
+{
+    id:2,
+    value: "p",
+    type: "Published",
+
+}]
+const ITEM_HEIGHT = 50;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
   PaperProps: {
     style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
+      maxHeight: ITEM_HEIGHT * 5 + ITEM_PADDING_TOP,
+      width: 150,
     },
   },
 };
 
 const NewBlogForm = ({ values, handleChange, errors, touched, handleBlur }) => {
-      const [personName, setPersonName] = useState([]);
-      const {blogs} = useSelector((state) => state.blog)
-
-      console.log(blogs)
+      const {getCategories} = useBlogCalls()
+      const {blogs,categories} = useSelector((state) => state.blog)
     
+       useEffect(() => {
+         // getFirms()
+         getCategories()
+        }, []) 
+        console.log(blogs)
+        console.log(categories)
+        
+//   {categories.map((category)=>categorieNames.push(category))}
 
+ 
   return (
     <div>
       <Form>
@@ -85,45 +93,51 @@ const NewBlogForm = ({ values, handleChange, errors, touched, handleBlur }) => {
             helperText={touched.image && errors.image}
             error={touched.image && Boolean(errors.image)}
           />
-          
-        <InputLabel id="demo-multiple-name-label">Category</InputLabel>
+        <FormControl fullWidth>
+        <InputLabel id="category">Category</InputLabel>
         <Select
-          labelId="demo-multiple-name-label"
-          id="demo-multiple-name"
-          multiple
-          value={personName}
+          labelId="category"
+          id="category"
+          name="category"   
+          value={values.category}
           onChange={handleChange}
           input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
         >
-          {names.map((name) => (
+          {categories.map((category) => (
             <MenuItem
-              key={name}
-              value={name} 
+              key={category.id}
+              value={category.name} 
             >
-              {name}
+              {category.name}
             </MenuItem>
           ))}
         </Select>
-        <InputLabel id="demo-multiple-name-label">Status</InputLabel>
+        </FormControl> 
+         <FormControl fullWidth>
+
+        <InputLabel id="status">Status</InputLabel>
         <Select
-          labelId="demo-multiple-name-label"
-          id="demo-multiple-name"
-          multiple
-          value={personName}
+          labelId="status"
+          id="status"
+          name="status"
+          value={values.status}
           onChange={handleChange}
           input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
         >
-          {names.map((name) => (
+          {status.map((statu) => (
             <MenuItem
-              key={name}
-              value={name} 
+              key={statu.id}
+              value={statu.value} 
             >
-              {name}
+              {statu.type}
             </MenuItem>
           ))}
         </Select>
+         </FormControl>
+
+      
         <TextField
             label="Content"
             name="content"
